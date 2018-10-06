@@ -1,5 +1,5 @@
 all:
-	pdflatex -shell-escape demo.tex
+	pdflatex -shell-escape main.tex
 
 clean:
 	@rm -f *.pdf *.aux *.log *.nav *.out *.toc *.snm *.vrb
