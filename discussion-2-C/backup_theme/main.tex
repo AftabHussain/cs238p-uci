@@ -31,9 +31,12 @@
 % \usepgfplotslibrary{dateplot}
 
 \usepackage{xspace}
-\usepackage{minted}
+% \usepackage{minted}
+\usepackage{listing}
 %\usepackage{tabularx}
 % \usepackage{bytefield}
+
+% \usepackage{minted}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FONTS
@@ -288,31 +291,41 @@
 % 	\end{itemize}
 % 	\end{frame}
 \section{Section 1}
+{
+	% \begin{frame}[fragile]{Pointers \& buffer management}
 	\begin{frame}[fragile]{Pointers \& buffer management}
+
+		\begin{lstlisting}
+			#define KERNBASE 0x80000000
+
+			#define P2V(a) (((void *) (a)) + KERNBASE)
+
+			uchar *code;
+			
+			code = P2V(0x7000);
+		\end{lstlisting}
+
 	\begin{itemize}
 	\item<1-> Access raw memory
-	\begin{minted}{c}
-	#define KERNBASE 0x80000000
-	#define P2V(a) (((void *) (a)) + KERNBASE)
-	uchar *code;
-	code = P2V(0x7000);
-	\end{minted}
-	\item<2-> kalloc, memset, kfree
-	\begin{minted}{c}
-	mem = kalloc(); /* allocate a page */
-	memset(mem, 0, PGSIZE); /* memset */
-	kfree(mem); /* free it when done */
-	\end{minted}
-	\item<3-> memcpy, memmove
-	\begin{minted}{c}
-	/* move start to code */
-	memmove(code, _binary_entryother_start,
-				(uint)_binary_entryother_size);
-	\end{minted}
+	% \begin{minted}{c}
+		
+	% \end{minted}
+	% \item<2-> kalloc, memset, kfree
+	% \begin{minted}{c}
+	% mem = kalloc(); /* allocate a page */
+	% memset(mem, 0, PGSIZE); /* memset */
+	% kfree(mem); /* free it when done */
+	% \end{minted}
+	% \item<3-> memcpy, memmove
+	% \begin{minted}{c}
+	% /* move start to code */
+	% memmove(code, _binary_entryother_start,
+	% 			(uint)_binary_entryother_size);
+	% \end{minted}
 	\end{itemize}
 	\end{frame}
-	}
-	
+	% }
+}	
 	
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
