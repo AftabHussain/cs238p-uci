@@ -1,0 +1,3 @@
+	/* move start to code */
+	memmove(code, _binary_entryother_start,
+				(uint)_binary_entryother_size);

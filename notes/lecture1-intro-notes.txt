@@ -1,0 +1,26 @@
+unix version 5 was written in assembly
+# What is RIP/RSP/etc we know the E registers?
+R <-> E interchangeable, depending on which architecture you are using. 
+microcode is loaded on the cpu, shipped by the cpu, not much is known (Intel Mgt Engine)
+
+the stack pointer is RSP/ESP
+
+Why we need stack?
+using more memory, and keeping track ( which is essentially)
+
+Reading/Wrting
+Register - 1 cycle
+L1 - 2 cycles
+L2 - 20 cycles
+L3 - 60 cycles
+
+assembly instruction: call.
+
+after the call to a new function, the instruction pointer would be pointing to the new instruction (this pointer is EIP or RIP - depending on architecture 32 or 64 bit.)
+Thereafter, the hardware pushes the address of the next instruction on the stack, and the stack pointer also changes. 
+
+How you return is not clear -> how do you know what to pop? We have to mention where  and how and when the Return pointer is stored.
+
+Okay, caller pushes the return address on the stack. 
+
+H/w executes instruction always one by one.

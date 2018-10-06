@@ -1,0 +1,11 @@
+\frametitle{Arrays}
+\begin{itemize}
+\item<1-> Collection of objects of the same data type
+\item<2-> Accessed by index (\texttt{0 ... size - 1})
+\item<3-> String is an array of characters (demo: string.c)
+\item<4-> No reference operator
+\begin{minted}{c}
+printf("Address of a \%p | \%p\n", a, &a);
+>> Address of a 0x7aff07024060 | 0x7aff07024060
+\end{minted}
+\end{itemize}

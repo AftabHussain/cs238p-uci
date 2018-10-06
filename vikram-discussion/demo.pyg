@@ -1,0 +1,2 @@
+printf("Address of a \%p | \%p\n", a, &a);
+>> Address of a 0x7aff07024060 | 0x7aff07024060

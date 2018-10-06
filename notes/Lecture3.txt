@@ -1,0 +1,49 @@
+Lecture 3
+
+fd 0 index to array (pdt - process's file descriptor table), the array is maintained by the os.
+each process has a file descriptor table...The table contains the pointers to the actual files which are actually data structures....
+talking about these pointers.....[there was sth about these pointers Anton mentioned..he mentioned initially the pointer is 0 and then is changed.need to look into this #ah to resolve]
+
+Q. when read() returns 0 or negative value #ah to resolve
+
+child and parent have separate file descriptor tables but can read from the same file 
+
+fork() returns to EAX - need to go further deeper into this in particular, where are return values stored in general... #ah to resolve
+
+how big is the file descriptor table? #ah to resolve
+
+what are the values of the elements in the file desctp table initially?
+
+exec replaces the process memory, but leaves the process's file table untouched.
+
+for and exec happens
+in 
+wc -l > foobar.txt
+
+as 
+fork()
+close()
+open(foobar)
+exec(wc)
+
+IMP File descriptors can point to files or OBJECTS! any read/write object, it can point to a pipe, or a network channel.
+
+A pipe is a buffer (of say 1 kB) (a pipe has two ends a read end and a write end). input comes into read end of the pipe, and the data is picked up from the write end of the pipe. (a pipe can contain temporary buffer values)
+
+understanding pipe function:- (refer to slide)
+
+pipe takes an array of two integers (1 pointing to read end of pipe, and 1 pointing to write end.)
+
+After fork, the file descriptor table is duplicated.
+
+dup() does the following
+
+The dup() system call creates a copy of the file descriptor oldfd, using the lowest-numbered unused descriptor for the new descriptor.
+
+fork and exec help in composability, and redirection
+
+#ah to resolve - where is the pipe code anton mentioned in the slide coming from?
+
+Android is Linux + Java #ah to resolve - check from wiki
+
+
