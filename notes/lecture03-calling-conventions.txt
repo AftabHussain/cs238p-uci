@@ -1,0 +1,64 @@
+9 oct 2018
+
+cpu
+
+fetches the instruction
+decodes ''
+executes ''
+
+fde cycle slide (from intel sgx) 
+
+2 important registers: 
+1. 64 bit machine - RIP = 32 bit maching EIP
+2. RSP (or ESP) - stack pointer (pointer to a region of the stack memory)
+
+A timer can raise an interrupt.
+
+decoding details omitted (out of scope). (the stuff in the memory are just bits.. need to decode them
+to make sense of them)
+
+the following instructions change the stack region
+call/return
+push/pop
+
+we don't know how much stack space we need beforehand. Stack provides an abstraction of unlimited memory.
+It's not a good idea to keep the stack growing into other areas of the memory...there is a danger you will overwrite ( in an os
+you can have a page in the memory which is unmapped, and the moment the stack hits that part, an error will occur)
+
+all the functions reside in the same address space in the memory. 
+	eg.
+	instruction call foo
+
+what happens is that we would jump to the location where foo instructions exist in the address space. The jump address can be an
+offset of the address of the instruction. 
+
+in x86 there are 8 registers. If you run out of registers, you can save the register values on the stack,  and restore them later. 
+
+pay attention to the slide on call (assembly instruction) what this call instruction actually does. 
+
+pop removes data from the stack, push adds data to the stack. 
+pop EAX, would remove the data from the stack and save it in the memory EAX. 
+
+almost all instructions would change the EIP.
+
+## Starting Calling Conventions:
+
+Each function has a new frame. This is how you fill in the stuff in the stack: params, return address, and then locals.
+EBP points to the current function in the stack. 
+ 
+We want to save the top of the stack (which is E to ESP. So what we do is first we save the EBP (push it on to the stack), and then assign the esp to ebp.  
+
+//the following two lines of assembly would be generated for even the simplest function (foo(){return;})
+push ebp - 2 cycles (the stuff is pushed on the L1 cache)
+mov ebp, esp - 1 cycle 
+
+Static variables are globals (allocated once for the entire program)....so they don't need to be allocated on the stack, 
+and can be allocated anywhere. Dynamically allocated variables are another example.... and they are stored in the heap. 
+
+Anton uses intel syntax for his assembly code on slides: e.g. move dest src
+
+Convention is to store the return the value in eax. so when you return you know the return value is in eax. 
+In assembly the code is just return.
+
+-m32 option is to tell gcc to compile to generate assembly for x32 bit architecture
+
